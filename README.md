@@ -1,3 +1,7 @@
+This is a fork of [libxml2](https://github.com/GNOME/libxml2), packaged for Zig.  Build logic from https://github.com/mattnite/zig-libssh2
+
+Original README follows:
+
 # libxml2
 
 libxml2 is an XML toolkit implemented in C, originally developed for
