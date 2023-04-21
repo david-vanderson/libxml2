@@ -174,10 +174,7 @@ pub fn build(b: *std.build.Builder) !void {
     lib.addIncludePath("include");
     lib.addIncludePath("build_zig_include");
     if (target.isWindows()) {
-        //ret.addIncludePath(win32_include_dir);
         lib.linkSystemLibrary("ws2_32");
-    } else {
-        //ret.addIncludePath(posix_include_dir);
     }
     lib.linkLibC();
 
