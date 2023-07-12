@@ -92,8 +92,6 @@ pub fn build(b: *std.build.Builder) !void {
         .VA_LIST_IS_ARRAY = 1,
         .XML_SOCKLEN_T = .socklen_t,
         .VERSION = "2.10.0-dev",
-        ._UINT32_T = ._uint32_t,
-        .uint32_t = .uint32_t,
     });
 
     lib.addConfigHeader(config_header);
