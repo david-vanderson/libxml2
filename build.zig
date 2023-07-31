@@ -169,8 +169,8 @@ pub fn build(b: *std.build.Builder) !void {
 
     lib.addCSourceFiles(srcs, flags.items);
 
-    lib.addIncludePath("include");
-    lib.addIncludePath("build_zig_include");
+    lib.addIncludePath(.{ .path = "include" });
+    lib.addIncludePath(.{ .path = "build_zig_include" });
     if (target.isWindows()) {
         lib.linkSystemLibrary("ws2_32");
     }
