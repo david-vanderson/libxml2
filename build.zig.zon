@@ -4,8 +4,9 @@
 
     .dependencies = .{
         .libz = .{
-            .url = "https://github.com/andrewrk/libz/archive/8bf2a1c61b87773131bee2086737b5f02b7c0888.tar.gz",
-            .hash = "12209e851f7e2c6ba2f01de3e11b1771f03e49666065320abd8414aac152bfa75fae",
+            .url = "https://github.com/david-vanderson/libz/archive/d1ceae96e00fa80710966916498837f2182e62dd.tar.gz",
+            .hash = "1220810ce4bbe12d918c208f3f526669b7e42866fd9849a2bdc6d84d97f9886da172",
         },
     },
+    .paths = .{""},
 }

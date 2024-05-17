@@ -40,7 +40,7 @@ pub const Options = struct {
     zlib: bool = true,
 };
 
-pub fn build(b: *std.build.Builder) !void {
+pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
@@ -95,9 +95,9 @@ pub fn build(b: *std.build.Builder) !void {
     });
 
     lib.addConfigHeader(config_header);
-    lib.installConfigHeader(config_header, .{});
+    lib.installConfigHeader(config_header);
 
-    var opts: Options = .{};
+    const opts: Options = .{};
 
     var flags = std.ArrayList([]const u8).init(b.allocator);
     defer flags.deinit();
@@ -123,7 +123,7 @@ pub fn build(b: *std.build.Builder) !void {
         "-DWITHOUT_TRIO=1",
     });
 
-    if (!target.isWindows()) {
+    if (target.result.os.tag != .windows) {
         try flags.appendSlice(&.{
             "-DHAVE_ARPA_INET_H=1",
             "-DHAVE_ARPA_NAMESER_H=1",
@@ -167,11 +167,11 @@ pub fn build(b: *std.build.Builder) !void {
         }
     }
 
-    lib.addCSourceFiles(srcs, flags.items);
+    lib.addCSourceFiles(.{ .files = srcs, .flags = flags.items });
 
     lib.addIncludePath(.{ .path = "include" });
     lib.addIncludePath(.{ .path = "build_zig_include" });
-    if (target.isWindows()) {
+    if (target.result.os.tag == .windows) {
         lib.linkSystemLibrary("ws2_32");
     }
     lib.linkLibC();
@@ -183,8 +183,8 @@ pub fn build(b: *std.build.Builder) !void {
     lib.linkLibrary(libz_dep.artifact("z"));
 
     b.installArtifact(lib);
-    lib.installHeadersDirectory("include", "");
-    lib.installHeader("build_zig_include/libxml/xmlversion.h", "libxml/xmlversion.h");
+    lib.installHeadersDirectory(b.path("include"), "", .{});
+    lib.installHeader(b.path("build_zig_include/libxml/xmlversion.h"), "libxml/xmlversion.h");
 }
 
 const srcs = &.{
