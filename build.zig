@@ -51,7 +51,7 @@ pub fn build(b: *std.Build) !void {
     });
 
     const config_header = b.addConfigHeader(.{
-        .style = .{ .cmake = .{ .path = "config.h.cmake.in" } },
+        .style = .{ .cmake = b.path("config.h.cmake.in") },
         .include_path = "config.h",
     }, .{
         .ATTRIBUTE_DESTRUCTOR = "__attribute__((destructor))",
@@ -169,8 +169,8 @@ pub fn build(b: *std.Build) !void {
 
     lib.addCSourceFiles(.{ .files = srcs, .flags = flags.items });
 
-    lib.addIncludePath(.{ .path = "include" });
-    lib.addIncludePath(.{ .path = "build_zig_include" });
+    lib.addIncludePath(b.path("include"));
+    lib.addIncludePath(b.path("build_zig_include"));
     if (target.result.os.tag == .windows) {
         lib.linkSystemLibrary("ws2_32");
     }
