@@ -141,11 +141,3 @@
 /* Determine what socket length (socklen_t) data type is */
 #cmakedefine XML_SOCKLEN_T @XML_SOCKLEN_T@
 
-/* Define for Solaris 2.5.1 so the uint32_t typedef from <sys/synch.h>,
-   <pthread.h>, or <semaphore.h> is not used. If the typedef were allowed, the
-   #define below would cause a syntax error. */
-#cmakedefine _UINT32_T @_UINT32_T@
-
-/* Define to the type of an unsigned integer type of width exactly 32 bits if
-   such a type exists and the standard includes do not define it. */
-#cmakedefine uint32_t @uint32_t@
